@@ -36,6 +36,8 @@ function DashboardContent() {
     return boards.filter((b) => b.name.toLowerCase().includes(query));
   }, [boards, search]);
 
+  const totalTasks = useMemo(() => boards.reduce((sum, b) => sum + (b.taskCount ?? 0), 0), [boards]);
+
   function openCreateDialog() {
     setEditingBoard(null);
     setFormOpen(true);
@@ -71,9 +73,16 @@ function DashboardContent() {
           className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
-            <h1 className="text-xl font-semibold tracking-tight text-foreground">My Boards</h1>
-            <p className="mt-0.5 text-sm text-muted-foreground">
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">My Boards</h1>
+            <p className="mt-1 text-sm text-muted-foreground">
               {user ? `Welcome back, ${user.name.split(' ')[0]}` : 'Your boards'}
+              {!isLoading && !error && boards.length > 0 && (
+                <>
+                  {' · '}
+                  {boards.length} {boards.length === 1 ? 'board' : 'boards'} · {totalTasks}{' '}
+                  {totalTasks === 1 ? 'task' : 'tasks'}
+                </>
+              )}
             </p>
           </div>
 

@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { AvatarStack } from '@/components/members/AvatarStack';
+import { getBoardAccent, cn } from '@/lib/utils';
 import type { Board, BoardMember } from '@/types';
 
 interface BoardHeaderProps {
@@ -22,6 +23,8 @@ interface BoardHeaderProps {
 }
 
 export function BoardHeader({ board, members, isOwner, onShare, onEdit, onDelete }: BoardHeaderProps) {
+  const initial = board.name.trim().charAt(0).toUpperCase() || '?';
+
   return (
     <header className="border-b border-border bg-background">
       <div className="container flex h-16 max-w-[calc(100vw-2rem)] items-center justify-between gap-4 lg:max-w-7xl">
@@ -33,6 +36,15 @@ export function BoardHeader({ board, members, isOwner, onShare, onEdit, onDelete
           >
             <FiChevronLeft className="h-4 w-4" />
           </Link>
+          <span
+            className={cn(
+              'flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-white',
+              getBoardAccent(board.id),
+            )}
+            aria-hidden="true"
+          >
+            {initial}
+          </span>
           <div className="min-w-0">
             <h1 className="truncate text-base font-semibold text-foreground">{board.name}</h1>
             {board.description && (

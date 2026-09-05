@@ -2,7 +2,7 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   darkMode: 'class',
-  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  content: ['./app/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './lib/**/*.{ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -67,6 +67,13 @@ const config: Config = {
           DEFAULT: 'hsl(var(--info))',
           foreground: 'hsl(var(--info-foreground))',
         },
+        'brand-panel': {
+          DEFAULT: 'hsl(var(--brand-panel))',
+          foreground: 'hsl(var(--brand-panel-foreground))',
+          muted: 'hsl(var(--brand-panel-muted))',
+          border: 'hsl(var(--brand-panel-border))',
+        },
+        'brand-accent': 'hsl(var(--brand-accent))',
       },
       borderRadius: {
         lg: 'var(--radius)',

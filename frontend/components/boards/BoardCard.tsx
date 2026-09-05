@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { formatRelativeTime } from '@/lib/utils';
+import { formatRelativeTime, getBoardAccent, cn } from '@/lib/utils';
 import { staggerItem } from '@/lib/motion';
 import type { Board } from '@/types';
 
@@ -22,6 +22,8 @@ interface BoardCardProps {
 }
 
 export function BoardCard({ board, isOwner, onEdit, onDelete }: BoardCardProps) {
+  const initial = board.name.trim().charAt(0).toUpperCase() || '?';
+
   return (
     <motion.div
       layout="position"
@@ -29,10 +31,19 @@ export function BoardCard({ board, isOwner, onEdit, onDelete }: BoardCardProps) 
       exit="exit"
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-      className="group relative flex flex-col rounded-lg border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md"
+      className="group relative flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm transition-all hover:border-brand-accent/40 hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-2">
-        <Link href={`/boards/${board.id}`} className="min-w-0 flex-1">
+        <Link href={`/boards/${board.id}`} className="flex min-w-0 flex-1 items-center gap-3">
+          <span
+            className={cn(
+              'flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-sm font-semibold text-white',
+              getBoardAccent(board.id),
+            )}
+            aria-hidden="true"
+          >
+            {initial}
+          </span>
           <h3 className="truncate font-medium text-foreground">{board.name}</h3>
         </Link>
 
@@ -69,7 +80,7 @@ export function BoardCard({ board, isOwner, onEdit, onDelete }: BoardCardProps) 
       </div>
 
       <Link href={`/boards/${board.id}`} className="flex flex-1 flex-col">
-        <p className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">
+        <p className="mt-3 line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">
           {board.description || 'No description'}
         </p>
 
