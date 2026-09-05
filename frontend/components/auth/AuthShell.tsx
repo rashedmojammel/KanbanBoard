@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { FiGrid } from 'react-icons/fi';
 import { ThemeToggle } from '@/components/layout/ThemeToggle';
 import { fadeInUp } from '@/lib/motion';
+import { AuthBrandPanel } from './AuthBrandPanel';
 
 export function AuthShell({
   title,
@@ -18,23 +19,28 @@ export function AuthShell({
   footer: ReactNode;
 }) {
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-muted/40 px-4 py-12">
-      <div className="absolute right-4 top-4">
-        <ThemeToggle />
-      </div>
-      <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="w-full max-w-sm">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <FiGrid className="h-5 w-5" />
-          </span>
-          <h1 className="text-xl font-semibold tracking-tight text-foreground">{title}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+    <div className="grid min-h-screen lg:grid-cols-2">
+      <AuthBrandPanel />
+
+      <div className="relative flex items-start justify-center px-4 pb-12 pt-16 sm:px-6 lg:items-center lg:py-12">
+        <div className="absolute right-4 top-4">
+          <ThemeToggle />
         </div>
 
-        <div className="rounded-lg border border-border bg-card p-6 shadow-sm">{children}</div>
+        <motion.div initial="hidden" animate="visible" variants={fadeInUp} className="w-full max-w-sm">
+          <div className="mb-8 flex flex-col items-start lg:items-start">
+            <span className="mb-4 flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground lg:hidden">
+              <FiGrid className="h-4 w-4" />
+            </span>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
+            <p className="mt-1.5 text-sm text-muted-foreground">{subtitle}</p>
+          </div>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">{footer}</p>
-      </motion.div>
+          <div className="rounded-xl border border-border bg-card p-6 shadow-sm sm:p-7">{children}</div>
+
+          <p className="mt-6 text-center text-sm text-muted-foreground">{footer}</p>
+        </motion.div>
+      </div>
     </div>
   );
 }

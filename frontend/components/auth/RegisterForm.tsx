@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { FiAlertCircle } from 'react-icons/fi';
+import { FiAlertCircle, FiMail, FiUser } from 'react-icons/fi';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -85,6 +85,7 @@ export function RegisterForm() {
           placeholder="Jane Doe"
           value={values.name}
           hasError={Boolean(errors.name)}
+          leftIcon={<FiUser className="h-4 w-4" />}
           onChange={(e) => updateField('name', e.target.value)}
         />
       </FormField>
@@ -97,6 +98,7 @@ export function RegisterForm() {
           placeholder="you@example.com"
           value={values.email}
           hasError={Boolean(errors.email)}
+          leftIcon={<FiMail className="h-4 w-4" />}
           onChange={(e) => updateField('email', e.target.value)}
         />
       </FormField>
@@ -123,7 +125,7 @@ export function RegisterForm() {
         />
       </FormField>
 
-      <Button type="submit" className="w-full" isLoading={isLoading}>
+      <Button type="submit" size="lg" className="w-full" isLoading={isLoading}>
         Create account
       </Button>
     </form>
