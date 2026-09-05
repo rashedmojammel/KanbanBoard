@@ -10,6 +10,7 @@ import { TaskCard } from './TaskCard';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { getErrorMessage } from '@/lib/error';
 import { staggerItem } from '@/lib/motion';
+import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { Column, Task } from '@/types';
 
@@ -53,12 +54,15 @@ export function KanbanColumn({
   }
 
   return (
-    <motion.div variants={staggerItem} className="flex w-72 shrink-0 flex-col gap-3 rounded-lg bg-muted/50 p-3">
-      <ColumnHeader name={column.name} taskCount={tasks.length} onRename={onRenameColumn} onDelete={() => setConfirmDeleteOpen(true)} />
+    <motion.div variants={staggerItem} className="flex w-72 shrink-0 flex-col gap-3 rounded-xl border border-border/60 bg-muted/40 p-3">
+      <ColumnHeader columnId={column.id} name={column.name} taskCount={tasks.length} onRename={onRenameColumn} onDelete={() => setConfirmDeleteOpen(true)} />
 
       <div
         ref={setNodeRef}
-        className={`flex min-h-[2rem] flex-col gap-2 rounded-md p-0.5 transition-colors ${isOver ? 'bg-primary/5 ring-1 ring-primary/30' : ''}`}
+        className={cn(
+          'flex min-h-[2rem] flex-col gap-2 rounded-lg p-0.5 transition-colors',
+          isOver && 'bg-brand-accent/5 ring-1 ring-brand-accent/40',
+        )}
       >
         <SortableContext items={tasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
           {tasks.length === 0 ? (

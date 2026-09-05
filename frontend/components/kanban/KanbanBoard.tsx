@@ -184,14 +184,13 @@ export function KanbanBoard({
         <AddColumnButton onCreate={createColumn} />
       </motion.div>
 
-      <DragOverlay dropAnimation={{ duration: 180, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }}>
+                 <DragOverlay dropAnimation={{ duration: 180, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }}>
         {activeTask ? (
-          <div className="w-72 rotate-2 scale-[1.03] rounded-md border border-primary/30 bg-card p-3 shadow-xl">
+          <div className="w-72 rotate-2 scale-[1.03] rounded-lg border border-brand-accent/40 bg-card p-3 shadow-xl">
             <p className="text-sm font-medium text-foreground">{activeTask.title}</p>
           </div>
         ) : null}
       </DragOverlay>
-
       <TaskDialog
         open={taskDialog.open}
         onOpenChange={(open) => setTaskDialog((prev) => ({ ...prev, open }))}

@@ -43,12 +43,12 @@ export function TaskCard({ task, columns, onEdit, onDelete, onMoveToColumn }: Ta
       whileHover={isDragging ? undefined : { y: -1 }}
       transition={{ duration: 0.15 }}
       className={cn(
-        'group flex items-start gap-2 rounded-md border border-border bg-card p-3 shadow-sm transition-shadow hover:shadow-md hover:border-border/80',
+        'group flex items-start gap-2 rounded-lg border border-border bg-card p-3 shadow-sm transition-all hover:border-brand-accent/40 hover:shadow-md',
       )}
     >
       <button
         type="button"
-        className="mt-0.5 shrink-0 cursor-grab touch-none text-muted-foreground/50 hover:text-muted-foreground active:cursor-grabbing"
+        className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded text-muted-foreground/50 cursor-grab touch-none hover:bg-accent hover:text-muted-foreground active:cursor-grabbing"
         aria-label="Drag to reorder"
         {...attributes}
         {...listeners}

@@ -48,12 +48,15 @@ export function AddColumnButton({ onCreate }: AddColumnButtonProps) {
         }
       }}
     >
-      <button
+            <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex h-fit w-72 shrink-0 items-center gap-1.5 rounded-lg border border-dashed border-border p-3 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:bg-accent hover:text-foreground"
+        className="flex h-fit w-72 shrink-0 items-center gap-2 rounded-xl border border-dashed border-border p-3 text-sm text-muted-foreground transition-colors hover:border-brand-accent/50 hover:bg-brand-accent/5 hover:text-foreground"
       >
-        <FiPlus className="h-4 w-4" /> Add Column
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent">
+          <FiPlus className="h-3.5 w-3.5" />
+        </span>
+        Add Column
       </button>
 
       <DialogContent>

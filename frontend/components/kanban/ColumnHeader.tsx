@@ -9,15 +9,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { getBoardAccent, cn } from '@/lib/utils';
 
 interface ColumnHeaderProps {
+  columnId: string;
   name: string;
   taskCount: number;
   onRename: (name: string) => Promise<void>;
   onDelete: () => void;
 }
 
-export function ColumnHeader({ name, taskCount, onRename, onDelete }: ColumnHeaderProps) {
+export function ColumnHeader({ columnId, name, taskCount, onRename, onDelete }: ColumnHeaderProps) {
   const [isRenaming, setIsRenaming] = useState(false);
   const [value, setValue] = useState(name);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,6 +65,7 @@ export function ColumnHeader({ name, taskCount, onRename, onDelete }: ColumnHead
           onClick={() => setIsRenaming(true)}
           className="flex min-w-0 items-center gap-2 rounded px-1 py-0.5 text-left hover:bg-accent"
         >
+          <span className={cn('h-2 w-2 shrink-0 rounded-full', getBoardAccent(columnId))} aria-hidden="true" />
           <span className="truncate text-sm font-semibold text-foreground">{name}</span>
           <span className="shrink-0 rounded-full bg-muted px-1.5 py-0.5 text-xs font-medium text-muted-foreground">
             {taskCount}
