@@ -4,24 +4,18 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main(): Promise<void> {
-  const password = await bcrypt.hash('Password123', 12);
+  const password = await bcrypt.hash('Rashed890', 12);
 
   const owner = await prisma.user.upsert({
-    where: { email: 'alice.owner@example.com' },
+    where: { email: 'rashedmojammel56@gmail.com' },
     update: {},
-    create: { name: 'Alice Owner', email: 'alice.owner@example.com', passwordHash: password },
+    create: { name: 'Rashed', email: 'rashedmojammel56@gmail.com', passwordHash: password },
   });
 
   const memberOne = await prisma.user.upsert({
-    where: { email: 'bob.member@example.com' },
+    where: { email: 'beg4mercy890@gmail.com' },
     update: {},
-    create: { name: 'Bob Member', email: 'bob.member@example.com', passwordHash: password },
-  });
-
-  const memberTwo = await prisma.user.upsert({
-    where: { email: 'carol.member@example.com' },
-    update: {},
-    create: { name: 'Carol Member', email: 'carol.member@example.com', passwordHash: password },
+    create: { name: 'Board Member', email: 'beg4mercy890@gmail.com', passwordHash: password },
   });
 
   const outsider = await prisma.user.upsert({
@@ -39,7 +33,6 @@ async function main(): Promise<void> {
         create: [
           { userId: owner.id, role: BoardRole.OWNER },
           { userId: memberOne.id, role: BoardRole.MEMBER },
-          { userId: memberTwo.id, role: BoardRole.MEMBER },
         ],
       },
       columns: {
@@ -82,8 +75,8 @@ async function main(): Promise<void> {
 
   const personalBoard = await prisma.board.create({
     data: {
-      name: 'Alice - Personal Tasks',
-      description: 'Private board only Alice can see',
+      name: 'Rashed - Personal Tasks',
+      description: 'Private board only the owner can see',
       ownerId: owner.id,
       members: {
         create: [{ userId: owner.id, role: BoardRole.OWNER }],
@@ -107,7 +100,7 @@ async function main(): Promise<void> {
 
   console.log('Seed complete:');
   console.log({
-    users: { owner: owner.email, memberOne: memberOne.email, memberTwo: memberTwo.email, outsider: outsider.email },
+    users: { owner: owner.email, memberOne: memberOne.email, outsider: outsider.email },
     boards: { productBoard: productBoard.id, personalBoard: personalBoard.id },
     password: 'Password123 (for all seeded users)',
   });
